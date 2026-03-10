@@ -1,7 +1,1 @@
-flask
-flask-cors
-yt-dlp
-openai-whisper
-anthropic
-python-dotenv
-gunicorn
+(echo flask & echo flask-cors & echo yt-dlp & echo openai-whisper & echo anthropic & echo python-dotenv & echo gunicorn) > requirements.txt
