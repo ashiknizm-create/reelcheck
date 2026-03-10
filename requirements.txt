@@ -5,3 +5,4 @@ openai-whisper
 anthropic
 python-dotenv
 gunicorn
+requests

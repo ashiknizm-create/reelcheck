@@ -1,1 +1,7 @@
-(echo .env & echo __pycache__/ & echo *.pyc & echo *.mp3 & echo *.mp4 & echo *.wav & echo *.m4a)
+.env
+__pycache__/
+*.pyc
+*.mp3
+*.mp4
+*.wav
+*.m4a

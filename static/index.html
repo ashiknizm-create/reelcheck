@@ -54,8 +54,8 @@ textarea{resize:vertical;min-height:80px;margin-bottom:16px}
 .spinner{width:56px;height:56px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .9s linear infinite}
 .spinner-inner{position:absolute;inset:8px;border:2px solid transparent;border-top-color:var(--accent2);border-radius:50%;animation:spin .6s linear infinite reverse}
 .loading-title{font-size:17px;font-weight:600;margin-bottom:4px}
-.loading-sub{font-size:13px;color:var(--muted2)}
-.steps{list-style:none;display:flex;flex-direction:column;gap:12px;text-align:left;max-width:320px;margin:24px auto 0}
+.loading-sub{font-size:13px;color:var(--muted2);margin-bottom:20px}
+.steps{list-style:none;display:flex;flex-direction:column;gap:12px;text-align:left;max-width:340px;margin:0 auto}
 .steps li{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);transition:color .3s}
 .steps li.active{color:var(--text)}
 .steps li.done{color:var(--true)}
@@ -66,9 +66,9 @@ textarea{resize:vertical;min-height:80px;margin-bottom:16px}
 .error-card{display:none;background:rgba(255,23,68,0.07);border:1px solid rgba(255,23,68,0.25);border-radius:16px;padding:18px 22px;color:#ff6b6b;font-size:14px;margin-bottom:20px;line-height:1.6}
 .error-card.show{display:block;animation:fadeUp .4s ease both}
 
-.transcript-card{display:none;background:rgba(0,229,255,0.04);border:1px solid rgba(0,229,255,0.15);border-radius:14px;padding:18px 22px;margin-bottom:20px;font-size:13px;color:var(--muted2);line-height:1.7}
-.transcript-card.show{display:block;animation:fadeUp .4s ease both}
-.transcript-card strong{display:block;color:var(--accent);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.info-card{display:none;background:rgba(0,229,255,0.04);border:1px solid rgba(0,229,255,0.15);border-radius:14px;padding:16px 20px;margin-bottom:20px;font-size:13px;color:var(--muted2);line-height:1.7}
+.info-card.show{display:block;animation:fadeUp .4s ease both}
+.info-card strong{display:block;color:var(--accent);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
 
 .results-card{display:none;background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:20px}
 .results-card.show{display:block;animation:fadeUp .5s ease both}
@@ -76,7 +76,7 @@ textarea{resize:vertical;min-height:80px;margin-bottom:16px}
 .results-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.06em;color:var(--accent)}
 .verdict-pill{display:flex;align-items:center;gap:8px;padding:7px 16px;border-radius:100px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
 .results-body{padding:28px}
-.reel-url-box{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-bottom:24px;font-size:12px;color:var(--muted2);word-break:break-all;font-family:'DM Mono',monospace;display:flex;align-items:flex-start;gap:10px}
+.reel-url-box{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-bottom:24px;font-size:12px;color:var(--muted2);word-break:break-all;font-family:'DM Mono',monospace}
 .output{font-size:15px;line-height:1.8;color:var(--text);white-space:pre-wrap}
 .output .t{color:var(--true);font-weight:700}
 .output .f{color:var(--false);font-weight:700}
@@ -115,14 +115,14 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:48px;line-
 <div class="wrap">
 
   <header>
-    <div class="badge"><span class="badge-dot"></span>Powered by Claude AI + Whisper</div>
+    <div class="badge"><span class="badge-dot"></span>Cobalt + Whisper + Claude AI</div>
     <h1>REEL<br>CHECK</h1>
-    <p class="subtitle">Paste any Instagram reel link. We download, transcribe, fact-check, and delete — all in seconds.</p>
+    <p class="subtitle">Paste any Instagram reel link. We stream the audio, transcribe it, and fact-check every claim — automatically.</p>
   </header>
 
   <div class="how-strip">
     <div class="how-item"><strong>①</strong>Paste reel URL</div>
-    <div class="how-item"><strong>②</strong>Audio downloaded</div>
+    <div class="how-item"><strong>②</strong>Cobalt streams audio</div>
     <div class="how-item"><strong>③</strong>Whisper transcribes</div>
     <div class="how-item"><strong>④</strong>Claude fact-checks</div>
   </div>
@@ -133,8 +133,11 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:48px;line-
       <input type="text" id="reelUrl" placeholder="https://www.instagram.com/reel/ABC123.../"/>
       <span class="url-icon">📎</span>
     </div>
-    <div class="card-label">What is this reel claiming? <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:11px">(optional — helps if download fails)</span></div>
-    <textarea id="context" placeholder="e.g. This reel says drinking raw garlic cures high blood pressure…"></textarea>
+    <div class="card-label">
+      Extra context
+      <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:11px">(optional — used if streaming fails)</span>
+    </div>
+    <textarea id="context" placeholder="e.g. This reel claims that drinking lemon water cures diabetes…"></textarea>
     <button class="btn-check" id="checkBtn" onclick="run()">
       <div class="btn-inner">🔍 <span>Fact Check This Reel</span></div>
     </button>
@@ -143,20 +146,21 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:48px;line-
   <div class="loading-card" id="loadingCard">
     <div class="spinner-wrap"><div class="spinner"></div><div class="spinner-inner"></div></div>
     <div class="loading-title">Analysing reel…</div>
-    <div class="loading-sub" id="loadingSub">Starting up…</div>
+    <div class="loading-sub" id="loadingSub">Starting…</div>
     <ul class="steps" id="steps">
-      <li id="s1"><span class="step-icon">1</span>Downloading reel audio</li>
-      <li id="s2"><span class="step-icon">2</span>Transcribing with Whisper AI</li>
-      <li id="s3"><span class="step-icon">3</span>Deleting audio file</li>
-      <li id="s4"><span class="step-icon">4</span>Claude fact-checking claims</li>
+      <li id="s1"><span class="step-icon">1</span>Fetching stream URL via Cobalt.tools</li>
+      <li id="s2"><span class="step-icon">2</span>Streaming and extracting audio</li>
+      <li id="s3"><span class="step-icon">3</span>Transcribing speech with Whisper AI</li>
+      <li id="s4"><span class="step-icon">4</span>Deleting audio file from server</li>
+      <li id="s5"><span class="step-icon">5</span>Claude fact-checking all claims</li>
     </ul>
   </div>
 
   <div class="error-card" id="errorCard"></div>
 
-  <div class="transcript-card" id="transcriptCard">
-    <strong>🎙 What Claude heard (transcript)</strong>
-    <span id="transcriptText"></span>
+  <div class="info-card" id="infoCard">
+    <strong>🎙 What Claude heard</strong>
+    <span id="infoText"></span>
   </div>
 
   <div class="results-card" id="resultsCard">
@@ -181,20 +185,21 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:48px;line-
   </div>
 
   <footer>
-    ReelCheck downloads audio temporarily, transcribes it, then deletes it immediately.<br>
-    Powered by Whisper AI + Claude. Always verify critical claims with primary sources.
+    ReelCheck uses Cobalt.tools to stream audio, Whisper AI to transcribe, and Claude to fact-check.<br>
+    No video is stored. Audio is deleted immediately after transcription.
   </footer>
 </div>
 
 <script>
+const subs = ['','Connecting to Cobalt.tools…','Streaming audio…','Transcribing with Whisper AI…','Deleting audio from server…','Claude is analysing claims…'];
+
 function step(n){
-  const subs=['','Downloading reel audio…','Transcribing speech to text…','Deleting audio file…','Claude is analysing claims…'];
-  document.getElementById('loadingSub').textContent=subs[n]||'';
-  for(let i=1;i<=4;i++){
-    const el=document.getElementById('s'+i);
-    el.className='';
-    if(i<n)el.className='done';
-    else if(i===n)el.className='active';
+  document.getElementById('loadingSub').textContent = subs[n] || '';
+  for(let i=1;i<=5;i++){
+    const el = document.getElementById('s'+i);
+    el.className = '';
+    if(i < n) el.className = 'done';
+    else if(i === n) el.className = 'active';
   }
 }
 
@@ -207,100 +212,109 @@ function colorize(t){
 }
 
 function getVerdict(text){
-  const u=text.toUpperCase();
-  const f=(u.match(/\bFALSE\b/g)||[]).length;
-  const m=(u.match(/\bMISLEADING\b/g)||[]).length;
-  const t=(u.match(/\bTRUE\b/g)||[]).length;
-  if(f>=2)return{label:'⚠ Likely False',bg:'rgba(255,23,68,0.15)',c:'#ff1744'};
-  if(m>=2)return{label:'⚠ Misleading',bg:'rgba(255,145,0,0.15)',c:'#ff9100'};
-  if(t>=2&&f===0)return{label:'✓ Mostly True',bg:'rgba(0,230,118,0.15)',c:'#00e676'};
-  return{label:'? Mixed Claims',bg:'rgba(170,0,255,0.15)',c:'#aa00ff'};
+  const u = text.toUpperCase();
+  const f = (u.match(/\bFALSE\b/g)||[]).length;
+  const m = (u.match(/\bMISLEADING\b/g)||[]).length;
+  const t = (u.match(/\bTRUE\b/g)||[]).length;
+  if(f >= 2) return {label:'⚠ Likely False', bg:'rgba(255,23,68,0.15)', c:'#ff1744'};
+  if(m >= 2) return {label:'⚠ Misleading', bg:'rgba(255,145,0,0.15)', c:'#ff9100'};
+  if(t >= 2 && f === 0) return {label:'✓ Mostly True', bg:'rgba(0,230,118,0.15)', c:'#00e676'};
+  return {label:'? Mixed Claims', bg:'rgba(170,0,255,0.15)', c:'#aa00ff'};
 }
 
-function buildEngage(url,context){
-  const topic=context||'instagram reel fact check';
-  const btns=[
-    {label:'Ask Claude.ai',icon:'🤖',href:`https://claude.ai/new?q=${encodeURIComponent('Fact check: '+topic)}`},
-    {label:'Google Search',icon:'🔍',href:`https://www.google.com/search?q=${encodeURIComponent('fact check '+topic)}`},
-    {label:'Snopes',icon:'📰',href:`https://www.snopes.com/search/?q=${encodeURIComponent(topic)}`},
-    {label:'PolitiFact',icon:'🏛️',href:`https://www.politifact.com/search/?q=${encodeURIComponent(topic)}`},
+function buildEngage(url, context){
+  const topic = context || 'instagram reel fact check';
+  const btns = [
+    {label:'Ask Claude.ai', icon:'🤖', href:`https://claude.ai/new?q=${encodeURIComponent('Fact check: '+topic)}`},
+    {label:'Google Search', icon:'🔍', href:`https://www.google.com/search?q=${encodeURIComponent('fact check '+topic)}`},
+    {label:'Snopes', icon:'📰', href:`https://www.snopes.com/search/?q=${encodeURIComponent(topic)}`},
+    {label:'PolitiFact', icon:'🏛️', href:`https://www.politifact.com/search/?q=${encodeURIComponent(topic)}`},
   ];
-  const wrap=document.getElementById('engageBtns');
-  wrap.innerHTML='';
-  btns.forEach(b=>{
-    const a=document.createElement('a');
-    a.className='engage-btn';a.href=b.href;a.target='_blank';a.rel='noopener noreferrer';
-    a.innerHTML=`<span>${b.icon}</span>${b.label}`;
+  const wrap = document.getElementById('engageBtns');
+  wrap.innerHTML = '';
+  btns.forEach(b => {
+    const a = document.createElement('a');
+    a.className = 'engage-btn';
+    a.href = b.href;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.innerHTML = `<span>${b.icon}</span>${b.label}`;
     wrap.appendChild(a);
   });
 }
 
 function showErr(msg){
-  const el=document.getElementById('errorCard');
-  el.innerHTML='⚠️ '+msg;
-  el.className='error-card show';
-  document.getElementById('loadingCard').className='loading-card';
-  document.getElementById('checkBtn').disabled=false;
+  const el = document.getElementById('errorCard');
+  el.innerHTML = '⚠️ ' + msg;
+  el.className = 'error-card show';
+  document.getElementById('loadingCard').className = 'loading-card';
+  document.getElementById('checkBtn').disabled = false;
 }
 
 async function run(){
-  const url=document.getElementById('reelUrl').value.trim();
-  const context=document.getElementById('context').value.trim();
+  const url = document.getElementById('reelUrl').value.trim();
+  const context = document.getElementById('context').value.trim();
 
-  document.getElementById('resultsCard').className='results-card';
-  document.getElementById('errorCard').className='error-card';
-  document.getElementById('transcriptCard').className='transcript-card';
+  document.getElementById('resultsCard').className = 'results-card';
+  document.getElementById('errorCard').className = 'error-card';
+  document.getElementById('infoCard').className = 'info-card';
 
-  if(!url){showErr('Please paste an Instagram reel URL.');return}
-  if(!url.includes('instagram.com')){showErr('Please enter a valid Instagram URL.');return}
+  if(!url){ showErr('Please paste an Instagram reel URL.'); return; }
+  if(!url.includes('instagram.com')){ showErr('Please enter a valid Instagram URL.'); return; }
 
-  document.getElementById('loadingCard').className='loading-card show';
-  document.getElementById('checkBtn').disabled=true;
+  document.getElementById('loadingCard').className = 'loading-card show';
+  document.getElementById('checkBtn').disabled = true;
   step(1);
 
-  const t2=setTimeout(()=>step(2),4000);
-  const t3=setTimeout(()=>step(3),18000);
-  const t4=setTimeout(()=>step(4),22000);
+  const t2 = setTimeout(()=>step(2), 3000);
+  const t3 = setTimeout(()=>step(3), 8000);
+  const t4 = setTimeout(()=>step(4), 22000);
+  const t5 = setTimeout(()=>step(5), 25000);
 
   try{
-    const res=await fetch('/factcheck',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({url,context})
+    const res = await fetch('/factcheck', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({url, context})
     });
 
-    clearTimeout(t2);clearTimeout(t3);clearTimeout(t4);
-    const data=await res.json();
+    clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); clearTimeout(t5);
+    const data = await res.json();
 
-    if(data.error){showErr(data.error);return}
+    if(data.error){ showErr(data.error); return; }
 
-    document.getElementById('loadingCard').className='loading-card';
+    document.getElementById('loadingCard').className = 'loading-card';
 
     // Show transcript if available
     if(data.transcript){
-      document.getElementById('transcriptText').textContent=data.transcript;
-      document.getElementById('transcriptCard').className='transcript-card show';
+      document.getElementById('infoText').textContent = data.transcript;
+      document.getElementById('infoCard').className = 'info-card show';
+    } else if(data.download_error){
+      document.getElementById('infoText').textContent = '⚠️ Could not stream audio: ' + data.download_error + '. Fact-checked using context only.';
+      document.getElementById('infoCard').className = 'info-card show';
     }
 
     // Show results
-    const v=getVerdict(data.result);
-    const pill=document.getElementById('verdictPill');
-    pill.textContent=v.label;pill.style.background=v.bg;pill.style.color=v.c;
-    pill.style.border=`1px solid ${v.c}44`;
+    const v = getVerdict(data.result);
+    const pill = document.getElementById('verdictPill');
+    pill.textContent = v.label;
+    pill.style.background = v.bg;
+    pill.style.color = v.c;
+    pill.style.border = `1px solid ${v.c}44`;
 
-    document.getElementById('urlDisplay').textContent=url;
-    document.getElementById('output').innerHTML=colorize(data.result);
-    buildEngage(url,context);
+    document.getElementById('urlDisplay').textContent = url;
+    document.getElementById('output').innerHTML = colorize(data.result);
+    buildEngage(url, context);
 
-    document.getElementById('resultsCard').className='results-card show';
-    document.getElementById('resultsCard').scrollIntoView({behavior:'smooth',block:'start'});
+    document.getElementById('resultsCard').className = 'results-card show';
+    document.getElementById('resultsCard').scrollIntoView({behavior:'smooth', block:'start'});
 
-  }catch(e){
-    clearTimeout(t2);clearTimeout(t3);clearTimeout(t4);
-    showErr('Could not reach the server. Make sure the backend is running.');
+  } catch(e){
+    clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); clearTimeout(t5);
+    showErr('Could not reach the server. Please try again.');
   }
 
-  document.getElementById('checkBtn').disabled=false;
+  document.getElementById('checkBtn').disabled = false;
 }
 </script>
 </body>
