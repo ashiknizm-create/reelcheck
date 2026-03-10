@@ -2,7 +2,8 @@ flask
 flask-cors
 yt-dlp
 openai-whisper
-anthropic
+groq
+instagrapi
 python-dotenv
 gunicorn
 requests
