@@ -1,0 +1,7 @@
+flask
+flask-cors
+yt-dlp
+openai-whisper
+anthropic
+python-dotenv
+gunicorn
